@@ -9,12 +9,10 @@ It has two modes:
 # Usage
 
 1. Add mode (you may not specify the mode here as the Add mode is the default behavior)
-
 ```
 TransformHelper.exe [-mode add] -solution C:\Work\MySolution.sln -existing Dev -new Live
 ```
 This will check all the projects in the solution for files like **[fileName].Dev.config** and will add the corresponding **[fileName].Live.config** files copying the content from the existing ones
-
 2. Apply mode
 ```
 TransformHelper.exe -mode apply -source "C:\Work\MySolution\WebProject\web.config" -transformFile "C:\Work\MySolution\WebProject\web.Dev.config" -target "C:\Temp\result.web.config"
