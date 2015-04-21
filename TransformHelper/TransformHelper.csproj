@@ -32,6 +32,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Build.Framework" />
+    <Reference Include="Microsoft.Build.Utilities.v4.0" />
+    <Reference Include="Microsoft.Web.Publishing.Tasks">
+      <HintPath>..\Reference Assemblies\Microsoft.Web.Publishing.Tasks\Microsoft.Web.Publishing.Tasks.Dll</HintPath>
+    </Reference>
     <Reference Include="Ookii.CommandLine, Version=2.2.0.0, Culture=neutral, PublicKeyToken=0c15020868fd6249, processorArchitecture=MSIL">
       <HintPath>..\packages\Ookii.CommandLine.2.2\lib\Ookii.CommandLine.dll</HintPath>
       <Private>True</Private>
@@ -45,13 +50,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ArgumentsParser.cs" />
-    <Compile Include="CommandLineArguments.cs" />
+    <Compile Include="Arguments\ArgumentsParser.cs" />
+    <Compile Include="Arguments\CommandLineArguments.cs" />
+    <Compile Include="Arguments\Mode.cs" />
+    <Compile Include="Transform\ConfigTransformer.cs" />
+    <Compile Include="Transform\LogBuildEngine.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ProjectInfo.cs" />
     <Compile Include="ProjectsProvider.cs" />
     <Compile Include="ProjectUpdater.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StringExtender.cs" />
+    <Compile Include="Transform\TransformationResult.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

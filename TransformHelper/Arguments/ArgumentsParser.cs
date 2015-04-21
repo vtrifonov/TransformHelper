@@ -2,7 +2,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace TransformHelper
+namespace TransformHelper.Arguments
 {
     public class ArgumentsParser
     {

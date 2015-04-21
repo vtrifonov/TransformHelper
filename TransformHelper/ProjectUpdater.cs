@@ -27,8 +27,12 @@ namespace TransformHelper
 
             Console.WriteLine(string.Format("Processing project {0} located in {1}", projectInfo.ProjectName, projectInfo.ProjectFilePath));
 
-            var transformationItems = document.Descendants("{http://schemas.microsoft.com/developer/msbuild/2003}Content")
-                .Where(x => x.Attributes("Include") != null && x.Attributes("Include").FirstOrDefault().Value.EndsWith(string.Format(".{0}.config", existingTransformation)));
+            var itemsWithInclude = document.Descendants()
+                .Where(x => 
+                        x.Attributes("Include") != null 
+                        && x.Attributes("Include").Count() > 0);
+
+            var transformationItems = itemsWithInclude.Where(x => x.Attributes("Include").FirstOrDefault().Value.EndsWith(string.Format(".{0}.config", existingTransformation), StringComparison.InvariantCultureIgnoreCase));
 
             if (transformationItems.Count() == 0)
             {
@@ -41,10 +45,9 @@ namespace TransformHelper
             foreach (XElement transformationItem in transformationItems)
             {
                 string transformationFilePath = transformationItem.Attributes("Include").FirstOrDefault().Value;
-                string newTransformationFilePath = transformationFilePath.Replace(string.Format(".{0}.config", existingTransformation), string.Format(".{0}.config", newTransformation));
+                string newTransformationFilePath = transformationFilePath.Replace(string.Format(".{0}.", existingTransformation), string.Format(".{0}.", newTransformation));
 
-                var existingNewTransformation = document.Descendants("{http://schemas.microsoft.com/developer/msbuild/2003}Content")
-                    .FirstOrDefault(x => x.Attributes("Include") != null && x.Attributes("Include").FirstOrDefault().Value == newTransformationFilePath);
+                var existingNewTransformation = itemsWithInclude.FirstOrDefault(x => x.Attributes("Include").FirstOrDefault().Value == newTransformationFilePath);
                 if (existingNewTransformation != null)
                 {
                     Console.WriteLine(string.Format("Content item for transformation file {0} already exists", newTransformationFilePath));

@@ -5,6 +5,17 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransformHelper", "TransformHelper\TransformHelper.csproj", "{719A34E7-81D0-474D-BB33-33D784127611}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reference Assemblies", "Reference Assemblies", "{850569B3-85E0-4190-B735-C67C1BCA8585}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Microsoft.Web.Publishing.Tasks", "Microsoft.Web.Publishing.Tasks", "{0E89CA29-F473-4B55-A727-328C85A963E8}"
+	ProjectSection(SolutionItems) = preProject
+		Reference Assemblies\Microsoft.Web.Publishing.Tasks\Microsoft.Web.Publishing.AllFilesInProjectFolder.targets = Reference Assemblies\Microsoft.Web.Publishing.Tasks\Microsoft.Web.Publishing.AllFilesInProjectFolder.targets
+		Reference Assemblies\Microsoft.Web.Publishing.Tasks\Microsoft.Web.Publishing.AllFilesInTheProject.targets = Reference Assemblies\Microsoft.Web.Publishing.Tasks\Microsoft.Web.Publishing.AllFilesInTheProject.targets
+		Reference Assemblies\Microsoft.Web.Publishing.Tasks\Microsoft.Web.Publishing.OnlyFilesToRunTheApp.targets = Reference Assemblies\Microsoft.Web.Publishing.Tasks\Microsoft.Web.Publishing.OnlyFilesToRunTheApp.targets
+		Reference Assemblies\Microsoft.Web.Publishing.Tasks\Microsoft.Web.Publishing.targets = Reference Assemblies\Microsoft.Web.Publishing.Tasks\Microsoft.Web.Publishing.targets
+		Reference Assemblies\Microsoft.Web.Publishing.Tasks\Microsoft.Web.Publishing.Tasks.Dll = Reference Assemblies\Microsoft.Web.Publishing.Tasks\Microsoft.Web.Publishing.Tasks.Dll
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +29,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0E89CA29-F473-4B55-A727-328C85A963E8} = {850569B3-85E0-4190-B735-C67C1BCA8585}
 	EndGlobalSection
 EndGlobal
