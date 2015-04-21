@@ -16,6 +16,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Microsoft.Web.Publishing.Ta
 		Reference Assemblies\Microsoft.Web.Publishing.Tasks\Microsoft.Web.Publishing.Tasks.Dll = Reference Assemblies\Microsoft.Web.Publishing.Tasks\Microsoft.Web.Publishing.Tasks.Dll
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{51B0EFFC-71CA-4B8C-8494-9EF23D94B5FE}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
