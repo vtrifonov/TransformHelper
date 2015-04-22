@@ -30,32 +30,56 @@ namespace TransformHelper.Arguments
         public bool Validate()
         {
             StringBuilder errors = new StringBuilder();
-            if (this.Mode == Arguments.Mode.Add)
+            switch (this.Mode)
             {
-                if (string.IsNullOrWhiteSpace(this.SolutionPath))
-                {
-                    errors.AppendLine("The required argument 'solution' for 'Add' mode was not supplied.");
-                }
-                if (string.IsNullOrWhiteSpace(this.NewTransformation))
-                {
-                    errors.AppendLine("The required argument 'new' for 'Add' mode was not supplied.");
-                }
-                if (string.IsNullOrWhiteSpace(this.SolutionPath))
-                {
-                    errors.AppendLine("The required argument 'existing' for 'Add' mode was not supplied.");
-                }
+                case Mode.Add:
+                    if (string.IsNullOrWhiteSpace(this.SolutionPath))
+                    {
+                        errors.AppendLine("The required argument 'solution' for 'Add' mode was not supplied.");
+                    }
+                    if (string.IsNullOrWhiteSpace(this.NewTransformation))
+                    {
+                        errors.AppendLine("The required argument 'new' for 'Add' mode was not supplied.");
+                    }
+                    if (string.IsNullOrWhiteSpace(this.ExsistingTransformation))
+                    {
+                        errors.AppendLine("The required argument 'existing' for 'Add' mode was not supplied.");
+                    }
+                    break;
+                case Mode.Remove:
+                    if (string.IsNullOrWhiteSpace(this.SolutionPath))
+                    {
+                        errors.AppendLine("The required argument 'solution' for 'Remove' mode was not supplied.");
+                    }
+                    if (string.IsNullOrWhiteSpace(this.ExsistingTransformation))
+                    {
+                        errors.AppendLine("The required argument 'existing' for 'Remove' mode was not supplied.");
+                    }
+                    break;
+                case Mode.Apply:
+                    if (string.IsNullOrWhiteSpace(this.SourceFile))
+                    {
+                        errors.AppendLine("The required argument 'source' for 'Apply' mode was not supplied.");
+                    }
+                    if (string.IsNullOrWhiteSpace(this.TransformationFile))
+                    {
+                        errors.AppendLine("The required argument 'transformFile' for 'Apply' mode was not supplied.");
+                    }
+                    break;
+                case Mode.ApplySLN:
+                    if (string.IsNullOrWhiteSpace(this.SolutionPath))
+                    {
+                        errors.AppendLine("The required argument 'solution' for 'ApplySLN' mode was not supplied.");
+                    }
+                    if (string.IsNullOrWhiteSpace(this.ExsistingTransformation))
+                    {
+                        errors.AppendLine("The required argument 'existing' for 'ApplySLN' mode was not supplied.");
+                    }
+                    break;
+                default:
+                    break;
             }
-            else
-            {
-                if (string.IsNullOrWhiteSpace(this.SourceFile))
-                {
-                    errors.AppendLine("The required argument 'source' for 'Apply' mode was not supplied.");
-                }
-                if (string.IsNullOrWhiteSpace(this.TransformationFile))
-                {
-                    errors.AppendLine("The required argument 'transformFile' for 'Apply' mode was not supplied.");
-                }
-            }
+
             var errorsList = errors.ToString();
             if (!string.IsNullOrWhiteSpace(errorsList))
             {

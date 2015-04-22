@@ -34,8 +34,24 @@ namespace TransformHelper
 
                     foreach (var project in projects)
                     {
-                        var projectUpdater = new ProjectUpdater(project, parameters.ExsistingTransformation, parameters.NewTransformation);
-                        projectUpdater.Update();
+                        var projectUpdater = new ProjectHelper(project);
+                        projectUpdater.AddTransformation(parameters.ExsistingTransformation, parameters.NewTransformation);
+                    }
+                    break;
+                case Mode.Remove:
+                    if (!File.Exists(parameters.SolutionPath))
+                    {
+                        throw new Exception(string.Format("Solution file {0} does not exist!", parameters.SolutionPath));
+                    }
+
+                    projectsProvider = new ProjectsProvider();
+
+                    projects = projectsProvider.GetProjects(parameters.SolutionPath);
+
+                    foreach (var project in projects)
+                    {
+                        var projectUpdater = new ProjectHelper(project);
+                        projectUpdater.RemoveTransformation(parameters.ExsistingTransformation);
                     }
                     break;
                 case Mode.Apply:
@@ -54,6 +70,22 @@ namespace TransformHelper
                     {
                         Console.WriteLine(transformationResult.Errors);
                         Environment.Exit(2);
+                    }
+                    break;
+                case Mode.ApplySLN:
+                    if (!File.Exists(parameters.SolutionPath))
+                    {
+                        throw new Exception(string.Format("Solution file {0} does not exist!", parameters.SolutionPath));
+                    }
+
+                    projectsProvider = new ProjectsProvider();
+
+                    projects = projectsProvider.GetProjects(parameters.SolutionPath);
+
+                    foreach (var project in projects)
+                    {
+                        var projectUpdater = new ProjectHelper(project);
+                        projectUpdater.ApplyTransformation(parameters.ExsistingTransformation);
                     }
                     break;
                 default:

@@ -18,6 +18,10 @@ namespace TransformHelper.Transform
             {
                 destinationFilePath = sourceFilePath;
                 sourceFilePath = System.IO.Path.GetTempFileName();
+                if (File.Exists(sourceFilePath))
+                {
+                    File.Delete(sourceFilePath);
+                }
                 File.Copy(destinationFilePath, sourceFilePath);
             }
 
