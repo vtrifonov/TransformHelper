@@ -88,6 +88,22 @@ namespace TransformHelper
                         projectUpdater.ApplyTransformation(parameters.ExsistingTransformation);
                     }
                     break;
+                case Mode.WarnAsErrors:
+                    if (!File.Exists(parameters.SolutionPath))
+                    {
+                        throw new Exception(string.Format("Solution file {0} does not exist!", parameters.SolutionPath));
+                    }
+
+                    projectsProvider = new ProjectsProvider();
+
+                    projects = projectsProvider.GetProjects(parameters.SolutionPath);
+
+                    foreach (var project in projects)
+                    {
+                        var projectUpdater = new ProjectHelper(project);
+                        projectUpdater.EnableWarningsAsErrors();
+                    }
+                    break;
                 default:
                     break;
             }

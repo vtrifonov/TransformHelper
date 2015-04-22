@@ -76,6 +76,12 @@ namespace TransformHelper.Arguments
                         errors.AppendLine("The required argument 'existing' for 'ApplySLN' mode was not supplied.");
                     }
                     break;
+                case Mode.WarnAsErrors:
+                    if (string.IsNullOrWhiteSpace(this.SolutionPath))
+                    {
+                        errors.AppendLine("The required argument 'solution' for 'WarnAsErrors' mode was not supplied.");
+                    }
+                    break;
                 default:
                     break;
             }

@@ -44,7 +44,7 @@ namespace TransformHelper
                 var existingNewTransformation = GetElementByIncludeValue(itemsWithInclude, newTransformationFilePath);
                 if (existingNewTransformation != null)
                 {
-                    Console.WriteLine(string.Format("Content item for transformation file {0} already exists", newTransformationFilePath));
+                    Console.WriteLine(string.Format("Item for transformation file {0} already exists", newTransformationFilePath));
                     continue;
                 }
 
@@ -65,7 +65,7 @@ namespace TransformHelper
 
                 newItem.Attributes("Include").FirstOrDefault().Value = newTransformationFilePath;
 
-                Console.WriteLine(string.Format("Adding Content item for transformation file {0}", newTransformationFilePath));
+                Console.WriteLine(string.Format("Adding item for transformation file {0}", newTransformationFilePath));
                 transformationItem.AddAfterSelf(newItem);
             }
 
@@ -151,6 +151,31 @@ namespace TransformHelper
                     transformer.ApplyTransformation(originalFileFullPath, transformationFileFullPath);
                 }
             }
+        }
+
+        public void EnableWarningsAsErrors()
+        {
+            XDocument document = XDocument.Parse(File.ReadAllText(projectInfo.ProjectFilePath));
+
+            Console.WriteLine(string.Format("================================{0}================================", projectInfo.ProjectName));
+
+            Console.WriteLine(string.Format("Processing project {0} located in {1}", projectInfo.ProjectName, projectInfo.ProjectFilePath));
+
+            var treatWarningsAsErrorsNode = document.Descendants().FirstOrDefault(x => x.Name.LocalName == "TreatWarningsAsErrors");
+            if (treatWarningsAsErrorsNode != null 
+                && !string.IsNullOrEmpty(treatWarningsAsErrorsNode.Value) 
+                && treatWarningsAsErrorsNode.Value.ToLower() == "true")
+            {
+                return;
+            }
+
+            var propertyGroup = document.Descendants().FirstOrDefault(x => x.Name.LocalName == "PropertyGroup");
+
+            Console.WriteLine("Adding <TreatWarningsAsErrors>true<TreatWarningsAsErrors>");
+            propertyGroup.Add(new XElement(propertyGroup.Name.Namespace + "TreatWarningsAsErrors", "true"));
+
+            Console.WriteLine(string.Format("Saving changes for project {0} located in {1}", projectInfo.ProjectName, projectInfo.ProjectFilePath));
+            document.Save(projectInfo.ProjectFilePath);
         }
 
         private IEnumerable<XElement> GetItemsWithInclude(XDocument document)

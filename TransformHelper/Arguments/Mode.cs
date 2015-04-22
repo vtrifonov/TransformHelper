@@ -6,6 +6,7 @@ namespace TransformHelper.Arguments
         Add = 0,
         Remove = 1,
         Apply = 2,
-        ApplySLN = 3
+        ApplySLN = 3,
+        WarnAsErrors = 4
     }
 }
